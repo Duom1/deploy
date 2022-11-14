@@ -74,13 +74,13 @@ fi
 if [ $opt_dw == "y" ]
 then
     echo "installing desktop..."
-    if [$opt_pkg_mgr -eq "1"]
+    if [ $opt_pkg_mgr -eq "1" ]
     then
         sudo xbps-install -y  base-devel git libX11-devel libXft-devel libXinerama-devel
-    elif [$opt_pkg_mgr -eq "2"]
+    elif [ $opt_pkg_mgr -eq "2" ]
     then
         sudo apt install -y base-dev git lix11-dev libxft-dev libxinerama-dev
-    elif [$opt_pkg_mgr -eq "3"]
+    elif [ $opt_pkg_mgr -eq "3" ]
     then
         sudo pacman -y -S base-devel git libx11-dev libxft-dev libxinerama-dev
     else
