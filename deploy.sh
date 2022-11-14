@@ -73,7 +73,7 @@ fi
 
 if [ $opt_dw == "y" ]
 then
-    echo installing desktop...
+    echo "installing desktop..."
     if [$opt_pkg_mgr -eq "1"]
     then
         sudo xbps-install -y  base-devel git libX11-devel libXft-devel libXinerama-devel
@@ -83,6 +83,8 @@ then
     elif [$opt_pkg_mgr -eq "3"]
     then
         sudo pacman -y -S base-devel git libx11-dev libxft-dev libxinerama-dev
+    else
+        echo HEYYYYY NOT INSTALLED
     fi
     cd ~
     mkdir .sources
@@ -110,7 +112,7 @@ then
     sudo make clean install
     cd ..
     cd dwm
-    cudo make clean install
+    sudo make clean install
     cd ..
     cd st
     sudo make clean install
