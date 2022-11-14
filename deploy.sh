@@ -12,8 +12,8 @@ read -p "choose package manager: " opt_pkg_mgr
 read -p "install desktop from git (dwm,dmenu,st,slstatus) y/n: " opt_dw
 if [ $opt_dw == "y" ]
 then 
-    read -p "enable icons? y/n: " opt_dw_icons
-    read -p "does this device have a battery? y/n:" opt_dw_batt
+    read -p "  enable icons? y/n: " opt_dw_icons
+    read -p "  does this device have a battery? y/n:" opt_dw_batt
 fi
 
 read -p "install dotfiles? y/n: " opt_dotf
@@ -132,6 +132,7 @@ then
     cp .bashrc ~
     cp .inputrc ~
     cp .xinitrc ~
+    mkdir ~/.config
     mkdir ~/.config/nvim
     cp init.lua ~/.config/nvim
 fi
