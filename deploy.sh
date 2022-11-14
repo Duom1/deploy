@@ -38,14 +38,14 @@ echo
 echo updating packages...
 if [ $opt_pkg_mgr -eq "1" ]
 then
-    sudo xbps-install -Syu
+    sudo xbps-install -y -Syu
 elif [ $opt_pkg_mgr -eq "2" ]
 then
-    sudo apt update
-    sudo apt upgrade
+    sudo apt update -y
+    sudo apt upgrade -y 
 elif [ $opt_pkg_mgr -eq "3" ]
 then
-    sudo pacman -Syu
+    sudo pacman -y -Syu
 else
     echo Sothing went wrong!
 fi
@@ -58,13 +58,13 @@ then
     echo installing extra packages...
     if [ $opt_pkg_mgr -eq "1" ]
     then
-        sudo xbps-install $ext_pkg
+        sudo xbps-install -y $ext_pkg
     elif [ $opt_pkg_mgr -eq "2" ]
     then
-        sudo apt install $ext_pkg
+        sudo apt install -y $ext_pkg
     elif [ $opt_pkg_mgr -eq "3" ]
     then
-        sudo pacman -S $ext_pkg
+        sudo pacman -y -S $ext_pkg
     fi
     echo done! installed extra packages
 fi
@@ -76,13 +76,13 @@ then
     echo installing desktop...
     if [$opt_pkg_mgr -eq "1"]
     then
-        sudo xbps-install base-devel git libX11-devel libXft-devel libXinerama-devel
+        sudo xbps-install -y  base-devel git libX11-devel libXft-devel libXinerama-devel
     elif [$opt_pkg_mgr -eq "2"]
     then
-        sudo apt install base-dev git lix11-dev libxft-dev libxinerama-dev
+        sudo apt install -y base-dev git lix11-dev libxft-dev libxinerama-dev
     elif [$opt_pkg_mgr -eq "3"]
     then
-        sudo pacman -S base-devel git libx11-dev libxft-dev libxinerama-dev
+        sudo pacman -y -S base-devel git libx11-dev libxft-dev libxinerama-dev
     fi
     cd ~
     mkdir .sources
@@ -128,6 +128,7 @@ if [ $opt_dotf == "y" ]
 then
     cd .sources/desktop
     git clone https://github.com/Duom1/dotfiles
+    cd dotfiles
     cp .bash_profile ~
     cp .bashrc ~
     cp .inputrc ~
