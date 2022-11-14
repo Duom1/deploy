@@ -97,6 +97,7 @@ then
         sed -i "/OPT_ICON/d" dwm/config.h
         sed -i "/OPT_ICON/d" slstatus/config.h
     elif [ $opt_dw_icons == "y" ]
+    then
         sed -i "/OPT_NO_ICON/d" dwm/config.h
         sed -i "/OPT_NO_ICON/d" slstatus/config.h
     fi
