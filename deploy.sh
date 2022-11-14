@@ -83,9 +83,7 @@ then
         sudo apt install -y xorg base-dev git lix11-dev libxft-dev libxinerama-dev
     elif [ $opt_pkg_mgr -eq "3" ]
     then
-        sudo pacman -y -S xorg base-devel git libx11-dev libxft-dev libxinerama-dev
-    else
-        echo HEYYYYY NOT INSTALLED
+        sudo pacman -y -S xorg base-devel git libx11 libxft libxinerama
     fi
     cd ~
     mkdir .sources
