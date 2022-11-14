@@ -1,5 +1,6 @@
 #!/bin/bash
 cd
+clear
 echo -e "     _        _\n|_| |_ |  |  | |\n| | |_ |_ |_ |_| "
 
 
@@ -17,7 +18,7 @@ fi
 
 read -p "install dotfiles? y/n: " opt_dotf
 
-read -p "install packe.nvim? y/n: " opt_pac_nvim
+read -p "install packer.nvim? y/n: " opt_pac_nvim
 
 read -p "install additional packages? y/n: " opt_ext_pkg
 if [ $opt_ext_pkg == "y" ]
@@ -102,6 +103,7 @@ then
         sed -i "/OPT_NO_ICON/d" slstatus/config.h
     fi
     if [ $opt_dw_batt == "y" ]
+    then
         sed -i "/OPT_BATTERY/d" slstatus/config.h
     fi
     cd dmenu
