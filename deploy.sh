@@ -17,12 +17,20 @@ fi
 
 read -p "install dotfiles? y/n: " opt_dotf
 
+read -p "install packe.nvim? y/n: " opt_pac_nvim
+
 read -p "install additional packages? y/n: " opt_ext_pkg
 if [ $opt_ext_pkg == "y" ]
 then
     read -p "add optional packages (separated by spaces): " ext_pkg
 fi
 
+
+
+if [ $opt_pac_nvim == "y" ]
+then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
 
 
 echo
