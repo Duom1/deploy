@@ -23,6 +23,7 @@ read -p "install packer.nvim? y/n: " opt_pac_nvim
 read -p "install additional packages? y/n: " opt_ext_pkg
 if [ $opt_ext_pkg == "y" ]
 then
+    echo esim. pfetch htop wget curl
     read -p "add optional packages (separated by spaces): " ext_pkg
 fi
 
@@ -76,13 +77,13 @@ then
     echo "installing desktop..."
     if [ $opt_pkg_mgr -eq "1" ]
     then
-        sudo xbps-install -y  base-devel git libX11-devel libXft-devel libXinerama-devel
+        sudo xbps-install -y  xorg base-devel git libX11-devel libXft-devel libXinerama-devel
     elif [ $opt_pkg_mgr -eq "2" ]
     then
-        sudo apt install -y base-dev git lix11-dev libxft-dev libxinerama-dev
+        sudo apt install -y xorg base-dev git lix11-dev libxft-dev libxinerama-dev
     elif [ $opt_pkg_mgr -eq "3" ]
     then
-        sudo pacman -y -S base-devel git libx11-dev libxft-dev libxinerama-dev
+        sudo pacman -y -S xorg base-devel git libx11-dev libxft-dev libxinerama-dev
     else
         echo HEYYYYY NOT INSTALLED
     fi
