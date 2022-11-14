@@ -103,6 +103,7 @@ then
     fi
     if [ $opt_dw_batt == "y" ]
         sed -i "/OPT_BATTERY/d" slstatus/config.h
+    fi
     cd dmenu
     sudo make clean install
     cd ..
