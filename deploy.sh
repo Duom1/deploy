@@ -17,6 +17,10 @@ then
 fi
 
 read -p "install dotfiles? y/n: " opt_dotf
+if [ $opt_dotf == "y" ]
+then
+    read -p "    include picon and nitrogen? y/n:" opt_dw_pn
+fi
 
 read -p "install packer.nvim? y/n: " opt_pac_nvim
 
@@ -143,5 +147,21 @@ then
     mkdir ~/.config
     mkdir ~/.config/nvim
     cp init.lua ~/.config/nvim
+    if [ $opt_dw_pn == "n" ]
+    then
+        sed -i "/OPT_DW_PN/d" ~/.xinitrc
+    fi
     echo done! installed dotfiles
 fi
+
+
+
+
+echo removing ~/deploy
+rm -rf ~/deploy
+echo done! removed ~/deploy
+echo
+echo
+echo
+echo Done! installing. have fun!
+echo
