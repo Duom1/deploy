@@ -12,7 +12,7 @@ read -p "choose package manager: " opt_pkg_mgr
 read -p "install desktop from git (dwm,dmenu,st,slstatus) y/n: " opt_dw
 if [ $opt_dw == "y" ]
 then 
-    read -p "    enable icons? y/n: " opt_dw_icons
+    read -p "    enable font awesome icons? y/n: " opt_dw_icons
     read -p "    does this device have a battery? y/n:" opt_dw_batt
 fi
 
@@ -20,7 +20,7 @@ read -p "install dotfiles? y/n: " opt_dotf
 
 read -p "install packer.nvim? y/n: " opt_pac_nvim
 
-echo esim. neofetch pfetch htop wget curl
+echo esim. neovim neofetch pfetch htop wget curl picon nitrogen
 read -p "install additional packages? y/n: " opt_ext_pkg
 if [ $opt_ext_pkg == "y" ]
 then
@@ -76,6 +76,7 @@ fi
 if [ $opt_dw == "y" ]
 then
     echo "installing desktop..."
+    echo installing desktop dependencies...
     if [ $opt_pkg_mgr -eq "1" ]
     then
         sudo xbps-install -y  xorg make gcc git libX11-devel libXft-devel libXinerama-devel
@@ -85,9 +86,8 @@ then
     elif [ $opt_pkg_mgr -eq "3" ]
     then
         sudo pacman -y -S xorg make gcc git libx11 libxft libxinerama
-    else
-        echo failed to install packages for desktop!!!
     fi
+    echo done! installed desktop dependencies
     cd ~
     mkdir .sources
     cd .sources
@@ -107,7 +107,7 @@ then
         sed -i "/OPT_NO_ICON/d" slstatus/config.h
     fi
     echo icons part is done
-    if [ $opt_dw_batt == "y" ]
+    if [ $opt_dw_batt == "n" ]
     then
         sed -i "/OPT_BATTERY/d" slstatus/config.h
         echo battery part removed
@@ -132,6 +132,7 @@ fi
 
 if [ $opt_dotf == "y" ]
 then
+    echo installing dotfiles...
     cd ~/.sources/desktop
     git clone https://github.com/Duom1/dotfiles
     cd dotfiles
@@ -142,4 +143,5 @@ then
     mkdir ~/.config
     mkdir ~/.config/nvim
     cp init.lua ~/.config/nvim
+    echo done! installed dotfiles
 fi
