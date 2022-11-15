@@ -12,30 +12,33 @@ read -p "choose package manager: " opt_pkg_mgr
 read -p "install desktop from git (dwm,dmenu,st,slstatus) y/n: " opt_dw
 if [ $opt_dw == "y" ]
 then 
-    read -p "  enable icons? y/n: " opt_dw_icons
-    read -p "  does this device have a battery? y/n:" opt_dw_batt
+    read -p "    enable icons? y/n: " opt_dw_icons
+    read -p "    does this device have a battery? y/n:" opt_dw_batt
 fi
 
 read -p "install dotfiles? y/n: " opt_dotf
 
 read -p "install packer.nvim? y/n: " opt_pac_nvim
 
+echo esim. neofetch pfetch htop wget curl
 read -p "install additional packages? y/n: " opt_ext_pkg
 if [ $opt_ext_pkg == "y" ]
 then
-    echo esim. pfetch htop wget curl
     read -p "add optional packages (separated by spaces): " ext_pkg
 fi
+echo
 
 
 
 if [ $opt_pac_nvim == "y" ]
 then
+    echo installing packer.nvim...
     git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    echo done! installed packer.nvim
 fi
 
 
-echo
+
 echo updating packages...
 if [ $opt_pkg_mgr -eq "1" ]
 then
@@ -47,8 +50,6 @@ then
 elif [ $opt_pkg_mgr -eq "3" ]
 then
     sudo pacman -y -Syu
-else
-    echo Sothing went wrong!
 fi
 echo done! updating packages
 
@@ -77,13 +78,15 @@ then
     echo "installing desktop..."
     if [ $opt_pkg_mgr -eq "1" ]
     then
-        sudo xbps-install -y  xorg base-devel git libX11-devel libXft-devel libXinerama-devel
+        sudo xbps-install -y  xorg make gcc git libX11-devel libXft-devel libXinerama-devel
     elif [ $opt_pkg_mgr -eq "2" ]
     then
-        sudo apt install -y xorg base-dev git lix11-dev libxft-dev libxinerama-dev
+        sudo apt install -y xorg make gcc git libx11-dev libxft-dev libxinerama-dev
     elif [ $opt_pkg_mgr -eq "3" ]
     then
-        sudo pacman -y -S xorg base-devel git libx11 libxft libxinerama
+        sudo pacman -y -S xorg make gcc git libx11 libxft libxinerama
+    else
+        echo failed to install packages for desktop!!!
     fi
     cd ~
     mkdir .sources
@@ -103,9 +106,11 @@ then
         sed -i "/OPT_NO_ICON/d" dwm/config.h
         sed -i "/OPT_NO_ICON/d" slstatus/config.h
     fi
+    echo icons part is done
     if [ $opt_dw_batt == "y" ]
     then
         sed -i "/OPT_BATTERY/d" slstatus/config.h
+        echo battery part removed
     fi
     cd dmenu
     sudo make clean install
@@ -127,7 +132,7 @@ fi
 
 if [ $opt_dotf == "y" ]
 then
-    cd .sources/desktop
+    cd ~/.sources/desktop
     git clone https://github.com/Duom1/dotfiles
     cd dotfiles
     cp .bash_profile ~
