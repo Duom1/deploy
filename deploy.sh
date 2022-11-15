@@ -46,14 +46,14 @@ fi
 echo updating packages...
 if [ $opt_pkg_mgr -eq "1" ]
 then
-    sudo xbps-install -y -Syu
+    sudo xbps-install -Syu
 elif [ $opt_pkg_mgr -eq "2" ]
 then
     sudo apt update -y
     sudo apt upgrade -y 
 elif [ $opt_pkg_mgr -eq "3" ]
 then
-    sudo pacman -y -Syu
+    sudo pacman -Syu
 fi
 echo done! updating packages
 
